@@ -19,7 +19,8 @@ export async function createBook(
     userId: id,
   };
   try {
-    await booksRepositories.createUser(data);
+    const book = await booksRepositories.createUser(data);
+    return book;
   } catch (error) {
     throw {
       type: "conflict",
@@ -35,6 +36,28 @@ export async function getBooks(token: string) {
   }
   const books = await booksRepositories.getBooksByUserId(id);
   return books;
+}
+
+export async function addReview(token: string, id: number, review: string) {
+  const userId = await verifyTokenReturnId(token);
+  if (id === null) {
+    throw { type: "unauthorized", message: "Token inválido" };
+  }
+  const bookInDb = await booksRepositories.getBooksById(id);
+  if (!bookInDb) {
+    throw {
+      type: "badRequest",
+      message: "Livro não encontrado",
+    };
+  }
+  if (bookInDb.userId !== userId) {
+    throw {
+      type: "unauthorized",
+      message: "Esse livro não pertence a esse usuario",
+    };
+  }
+
+  await booksRepositories.createReview(id, review);
 }
 
 export async function verifyTokenReturnId(token: string) {
