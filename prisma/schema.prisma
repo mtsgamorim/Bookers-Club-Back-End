@@ -16,12 +16,12 @@ model users {
   password        String        
   name            String
   image           String
-  books           books[]
+  books           book[]
 }
 
-model books {
+model book {
   id              Int             @id @default(autoincrement())
-  bookId          Int   
+  bookId          String   
   user            users            @relation(fields: [userId], references: [id])
   userId          Int
   title           String

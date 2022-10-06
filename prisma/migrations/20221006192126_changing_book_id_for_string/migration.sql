@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "books" ALTER COLUMN "bookId" SET DATA TYPE TEXT;
