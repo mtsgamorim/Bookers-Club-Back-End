@@ -16,4 +16,17 @@ model users {
   password        String        
   name            String
   image           String
+  books           books[]
+}
+
+model books {
+  id              Int             @id @default(autoincrement())
+  bookId          Int   
+  user            users            @relation(fields: [userId], references: [id])
+  userId          Int
+  title           String
+  image           String
+  review          String?
+
+  @@unique([bookId, userId])
 }
