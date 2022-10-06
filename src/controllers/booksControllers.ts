@@ -7,3 +7,9 @@ export async function createBook(req: Request, res: Response) {
   await booksServices.createBook(bookId, title, image, token);
   res.sendStatus(201);
 }
+
+export async function getBooks(req: Request, res: Response) {
+  const token = res.locals.token;
+  const books = await booksServices.getBooks(token);
+  res.status(200).send(books);
+}

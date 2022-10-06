@@ -28,6 +28,15 @@ export async function createBook(
   }
 }
 
+export async function getBooks(token: string) {
+  const id = await verifyTokenReturnId(token);
+  if (id === null) {
+    throw { type: "unauthorized", message: "Token inválido" };
+  }
+  const books = await booksRepositories.getBooksByUserId(id);
+  return books;
+}
+
 export async function verifyTokenReturnId(token: string) {
   const secret = process.env.JWT_SECRET;
   try {
