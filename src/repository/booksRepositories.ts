@@ -64,6 +64,9 @@ export async function getAllBooksWithReview(userId: number) {
       },
       review: true,
     },
+    orderBy: {
+      id: "desc",
+    },
   });
   return books;
 }
