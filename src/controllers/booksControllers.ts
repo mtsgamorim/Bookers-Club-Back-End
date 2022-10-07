@@ -28,3 +28,9 @@ export async function deleteBook(req: Request, res: Response) {
   await booksServices.deleteBook(token, id);
   res.sendStatus(200);
 }
+
+export async function getAllBooksWithReview(req: Request, res: Response) {
+  const token = res.locals.token;
+  const books = await booksServices.getAllBooksWithReview(token);
+  res.status(200).send(books);
+}

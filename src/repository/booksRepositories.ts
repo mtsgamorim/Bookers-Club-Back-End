@@ -42,3 +42,17 @@ export async function deleteBook(id: number) {
     },
   });
 }
+
+export async function getAllBooksWithReview(userId: number) {
+  const books = await prisma.book.findMany({
+    where: {
+      userId: {
+        not: userId,
+      },
+      review: {
+        not: null,
+      },
+    },
+  });
+  return books;
+}

@@ -7,6 +7,7 @@ import {
   getBooks,
   addReview,
   deleteBook,
+  getAllBooksWithReview,
 } from "../controllers/booksControllers";
 import validateIdParamMiddleware from "../middlewares/validateIdParamMiddleware";
 
@@ -31,6 +32,6 @@ router.delete(
   validateIdParamMiddleware,
   deleteBook
 );
-router.get("/reviews");
+router.get("/reviews", validateTokenExists, getAllBooksWithReview);
 
 export default router;

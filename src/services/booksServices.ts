@@ -83,6 +83,15 @@ export async function deleteBook(token: string, id: number) {
   await booksRepositories.deleteBook(id);
 }
 
+export async function getAllBooksWithReview(token: string) {
+  const id = await verifyTokenReturnId(token);
+  if (id === null) {
+    throw { type: "unauthorized", message: "Token inválido" };
+  }
+  const books = await booksRepositories.getAllBooksWithReview(id);
+  return books;
+}
+
 export async function verifyTokenReturnId(token: string) {
   const secret = process.env.JWT_SECRET;
   try {
