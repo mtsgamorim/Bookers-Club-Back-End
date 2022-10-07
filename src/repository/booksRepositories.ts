@@ -53,6 +53,17 @@ export async function getAllBooksWithReview(userId: number) {
         not: null,
       },
     },
+    select: {
+      id: true,
+      bookId: true,
+      user: {
+        select: {
+          name: true,
+          image: true,
+        },
+      },
+      review: true,
+    },
   });
   return books;
 }
