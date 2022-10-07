@@ -8,6 +8,7 @@ import {
   addReview,
   deleteBook,
   getAllBooksWithReview,
+  getBookByBookID,
 } from "../controllers/booksControllers";
 import validateIdParamMiddleware from "../middlewares/validateIdParamMiddleware";
 
@@ -20,6 +21,7 @@ router.post(
   createBook
 );
 router.get("/book", validateTokenExists, getBooks);
+router.get("/book/:bookID", validateTokenExists, getBookByBookID);
 router.patch(
   "/book/:id",
   validateTokenExists,

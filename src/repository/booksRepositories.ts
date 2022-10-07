@@ -56,3 +56,13 @@ export async function getAllBooksWithReview(userId: number) {
   });
   return books;
 }
+
+export async function getBookByBookID(bookID: string, userId: number) {
+  const book = await prisma.book.findFirst({
+    where: {
+      bookId: bookID,
+      userId: userId,
+    },
+  });
+  return book;
+}

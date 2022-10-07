@@ -34,3 +34,10 @@ export async function getAllBooksWithReview(req: Request, res: Response) {
   const books = await booksServices.getAllBooksWithReview(token);
   res.status(200).send(books);
 }
+
+export async function getBookByBookID(req: Request, res: Response) {
+  const token = res.locals.token;
+  const bookId = req.params.bookID;
+  const book = await booksServices.getBookByBookID(token, bookId);
+  res.status(200).send(book);
+}

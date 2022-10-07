@@ -102,3 +102,12 @@ export async function verifyTokenReturnId(token: string) {
     return null;
   }
 }
+
+export async function getBookByBookID(token: string, bookID: string) {
+  const userId = await verifyTokenReturnId(token);
+  if (userId === null) {
+    throw { type: "unauthorized", message: "Token inválido" };
+  }
+  const book = await booksRepositories.getBookByBookID(bookID, userId);
+  return book;
+}
