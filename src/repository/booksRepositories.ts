@@ -34,3 +34,11 @@ export async function createReview(id: number, review: string) {
     },
   });
 }
+
+export async function deleteBook(id: number) {
+  await prisma.book.delete({
+    where: {
+      id: id,
+    },
+  });
+}

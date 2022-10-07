@@ -6,6 +6,7 @@ import {
   createBook,
   getBooks,
   addReview,
+  deleteBook,
 } from "../controllers/booksControllers";
 import validateIdParamMiddleware from "../middlewares/validateIdParamMiddleware";
 
@@ -23,6 +24,12 @@ router.patch(
   validateTokenExists,
   validateIdParamMiddleware,
   addReview
+);
+router.delete(
+  "/book/:id",
+  validateTokenExists,
+  validateIdParamMiddleware,
+  deleteBook
 );
 router.get("/reviews");
 

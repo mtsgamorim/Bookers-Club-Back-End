@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import * as usersRepositories from "../repository/usersRepositories";
 import * as booksRepositories from "../repository/booksRepositories";
+import { string } from "joi";
 
 export async function createBook(
   bookId: string,
@@ -40,7 +41,7 @@ export async function getBooks(token: string) {
 
 export async function addReview(token: string, id: number, review: string) {
   const userId = await verifyTokenReturnId(token);
-  if (id === null) {
+  if (userId === null) {
     throw { type: "unauthorized", message: "Token inválido" };
   }
   const bookInDb = await booksRepositories.getBooksById(id);
@@ -58,6 +59,28 @@ export async function addReview(token: string, id: number, review: string) {
   }
 
   await booksRepositories.createReview(id, review);
+}
+
+export async function deleteBook(token: string, id: number) {
+  const userId = await verifyTokenReturnId(token);
+  if (userId === null) {
+    throw { type: "unauthorized", message: "Token inválido" };
+  }
+  const bookInDb = await booksRepositories.getBooksById(id);
+  if (!bookInDb) {
+    throw {
+      type: "badRequest",
+      message: "Livro não encontrado",
+    };
+  }
+  if (bookInDb.userId !== userId) {
+    throw {
+      type: "unauthorized",
+      message: "Esse livro não pertence a esse usuario",
+    };
+  }
+
+  await booksRepositories.deleteBook(id);
 }
 
 export async function verifyTokenReturnId(token: string) {

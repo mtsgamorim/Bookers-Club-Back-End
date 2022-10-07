@@ -18,6 +18,13 @@ export async function addReview(req: Request, res: Response) {
   const token = res.locals.token;
   const id = Number(req.params.id);
   const { review } = req.body;
-  const books = await booksServices.addReview(token, id, review);
+  await booksServices.addReview(token, id, review);
   res.sendStatus(201);
+}
+
+export async function deleteBook(req: Request, res: Response) {
+  const token = res.locals.token;
+  const id = Number(req.params.id);
+  await booksServices.deleteBook(token, id);
+  res.sendStatus(200);
 }
