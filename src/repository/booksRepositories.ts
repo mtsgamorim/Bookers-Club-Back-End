@@ -45,6 +45,7 @@ export async function deleteBook(id: number) {
 
 export async function getAllBooksWithReview(userId: number) {
   const books = await prisma.book.findMany({
+    take: 20,
     where: {
       userId: {
         not: userId,
