@@ -4,7 +4,7 @@ import * as booksServices from "../services/booksServices";
 export async function createBook(req: Request, res: Response) {
   const { bookId, title, image } = req.body;
   const token = res.locals.token;
-  const book = await booksServices.createBook(bookId, title, image, token);
+  const book = await booksServices.createBook(bookId, title, token);
   res.status(201).send(book);
 }
 

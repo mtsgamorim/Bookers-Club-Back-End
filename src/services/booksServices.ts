@@ -1,14 +1,8 @@
 import jwt from "jsonwebtoken";
 import * as usersRepositories from "../repository/usersRepositories";
 import * as booksRepositories from "../repository/booksRepositories";
-import { string } from "joi";
 
-export async function createBook(
-  bookId: string,
-  title: string,
-  image: string,
-  token: string
-) {
+export async function createBook(bookId: string, title: string, token: string) {
   const id = await verifyTokenReturnId(token);
   if (id === null) {
     throw { type: "unauthorized", message: "Token inválido" };
@@ -16,7 +10,6 @@ export async function createBook(
   const data = {
     bookId,
     title,
-    image,
     userId: id,
   };
   try {
