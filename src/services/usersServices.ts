@@ -37,18 +37,21 @@ async function verifyEmailAlreadyExists(email: string) {
 async function findUser(email: string) {
   const userInDB = await userRepositories.getUserByEmail(email);
   if (!userInDB) {
-    throw { type: "unauthorized", message: "Login ou senha incorreto" };
+    throw { type: "unauthorized", message: "Login ou senha incorretos" };
   }
   return userInDB;
 }
 
-async function verifyPassword(password: string, cryptedPassword: string) {
+export async function verifyPassword(
+  password: string,
+  cryptedPassword: string
+) {
   if (!bcrypt.compareSync(password, cryptedPassword)) {
-    throw { type: "unauthorized", message: "Login ou senha incorreto" };
+    throw { type: "unauthorized", message: "Login ou senha incorretos" };
   }
 }
 
-function createToken(id: number) {
+export function createToken(id: number) {
   const secret = process.env.JWT_SECRET;
   const data = { id };
   const token = jwt.sign(data, secret);

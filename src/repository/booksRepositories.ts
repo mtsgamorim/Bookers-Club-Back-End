@@ -1,7 +1,7 @@
 import prisma from "../database/prismaClient";
 import createBookType from "../types/booksTypes";
 
-export async function createUser(data: createBookType) {
+export async function createBook(data: createBookType) {
   const book = await prisma.book.create({ data });
   return book;
 }

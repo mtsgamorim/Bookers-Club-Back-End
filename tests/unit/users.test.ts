@@ -1,8 +1,6 @@
 import * as usersServices from "../../src/services/usersServices";
-import * as booksServices from "../../src/services/booksServices";
 import * as userRepositories from "../../src/repository/usersRepositories";
-import * as booksRepositories from "../../src/repository/booksRepositories";
-import userFactory from "../factory/userFactory";
+import { userFactory } from "../factory/userFactory";
 
 beforeEach(() => {
   jest.resetAllMocks();

@@ -13,7 +13,7 @@ export async function createBook(bookId: string, title: string, token: string) {
     userId: id,
   };
   try {
-    const book = await booksRepositories.createUser(data);
+    const book = await booksRepositories.createBook(data);
     return book;
   } catch (error) {
     throw {
