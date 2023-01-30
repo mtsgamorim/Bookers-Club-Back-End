@@ -47,9 +47,6 @@ export async function getAllBooksWithReview(userId: number) {
   const books = await prisma.book.findMany({
     take: 20,
     where: {
-      userId: {
-        not: userId,
-      },
       review: {
         not: null,
       },
